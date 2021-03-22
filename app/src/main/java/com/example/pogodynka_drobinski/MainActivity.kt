@@ -10,10 +10,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -62,7 +59,20 @@ class MainActivity : AppCompatActivity() {
         val temperatureTV = findViewById<TextView>(R.id.temperature)
         val pressureTV = findViewById<TextView>(R.id.pressure)
         val sunRiseSet = findViewById<TextView>(R.id.sun_rise_set)
+        val weatherIcon = findViewById<ImageView>(R.id.weatherIcon)
         timeTV = findViewById(R.id.time)
+
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        getLastLocation()
+        viewModel.myResponse.observe(this, { response ->
+            cityNameTV.text = response.name
+            temperatureTV.text = viewModel.tempConvert(response.main.temp).toString() + "°C"
+            pressureTV.text = response.main.pressure.toString()
+            sunRiseSet.text = viewModel.timeConvert((response.sys.sunrise).toLong()) + " " + viewModel.timeConvert((response.sys.sunset).toLong())
+            viewModel.fetchWeather(response.weather.first(),this)
+            weatherIcon.setImageResource(viewModel.icon!!)
+        })
 
         button.setOnClickListener {
             viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
@@ -70,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.getWeather(cityTV)
             viewModel.myResponse.observe(this, { response ->
                 cityNameTV.text = response.name
-                temperatureTV.text = viewModel.tempConvert(response.main.temp).toString()
+                temperatureTV.text = viewModel.tempConvert(response.main.temp).toString() + "°C"
                 pressureTV.text = response.main.pressure.toString()
                 sunRiseSet.text = viewModel.timeConvert((response.sys.sunrise).toLong()) + " " + viewModel.timeConvert((response.sys.sunset).toLong())
             })
@@ -159,3 +169,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
