@@ -107,4 +107,5 @@ class MainViewModel(private val repository: Repository): ViewModel() {
 
 
     fun tempConvert(temp: Double) = (temp - 273.15).roundToInt()
+
 }

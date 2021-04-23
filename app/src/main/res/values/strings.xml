@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Pogodynka_Drobinski</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="clear_sky">Pogodnie</string>
     <string name="few_clouds">Lekkie zachmurzenie</string>
     <string name="scattered_clouds">Pochmurno</string>
@@ -11,6 +12,19 @@
     <string name="thunderstorm">Burza</string>
     <string name="snow">Śnieg</string>
     <string name="mist">Mgła</string>
+
     <string name="sunrise">Wschód słońca</string>
     <string name="sunset">Zachód słońca</string>
+
+    <string name="basic">BASIC</string>
+    <string name="advanced">ADVANCED</string>
+
+    <string name="name">Name</string>
+    <string name="pressure">Pressure</string>
+
+    <string name="wilg">Wilgotność</string>
+    <string name="tempOdcz">Temp. Odczuwalna</string>
+    <string name="tempDN">Temp. Max / Min</string>
+    <string name="wind">Wiatr</string>
+
 </resources>
